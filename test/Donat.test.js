@@ -1,14 +1,21 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
-const { string } = require("hardhat/internal/core/params/argumentTypes");
 
 describe("Donat", function (){
-    it("Deposite", async function (){
-        const [owner] = await ethers.getSigners();
-        const Donat = await ethers.getContractFactory("Donat", owner);
-        const donat = await Donat.deploy();
-        await donat.deployed();
 
+    let owner;
+    let acc2;
+    let acc3;
+    let donat;
+
+    beforeEach(async function(){
+        [owner, acc2, acc3] = await ethers.getSigners();
+        Donat = await ethers.getContractFactory("Donat", owner);
+        donat = await Donat.deploy();
+        await donat.deployed();
+    })
+
+    it("Deposite", async function (){
 
         expect(await donat.Deposit()).to.equal(0);
 
@@ -26,10 +33,6 @@ describe("Donat", function (){
     });
 
     it("checkDonater", async function () {
-        const [owner] = await ethers.getSigners();
-        const Donat = await ethers.getContractFactory("Donat", owner);
-        const donat = await Donat.deploy();
-        await donat.deployed();
         
         shopAdress = "0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0";
     
@@ -51,10 +54,6 @@ describe("Donat", function (){
     });
 
     it("getDonaterList", async function () {
-        const [owner, acc2, acc3] = await ethers.getSigners();
-        const Donat = await ethers.getContractFactory("Donat", owner);
-        const donat = await Donat.deploy();
-        await donat.deployed();
         
         shopAdress = "0xdc64a140aa3e981100a9beca4e685f962f0cf6c9";
     
@@ -88,10 +87,6 @@ describe("Donat", function (){
     });
 
     it("getDonationAmount", async function () {
-        const [owner,acc2, acc3] = await ethers.getSigners();
-        const Donat = await ethers.getContractFactory("Donat", owner);
-        const donat = await Donat.deploy();
-        await donat.deployed();
         
         shopAdress = "0x0165878a594ca255338adfa4d48449f69242eb8f";
     
@@ -127,10 +122,6 @@ describe("Donat", function (){
     });
 
     it("Withdrawal", async function () {
-        const [owner,acc2] = await ethers.getSigners();
-        const Donat = await ethers.getContractFactory("Donat", owner);
-        const donat = await Donat.deploy();
-        await donat.deployed();
         
         shopAdress = "0x2279b7a0a67db372996a5fab50d91eaa73d2ebe6";
         ownerAddress = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
